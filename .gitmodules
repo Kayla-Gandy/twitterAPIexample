@@ -1,3 +1,6 @@
 [submodule "Src/twitcurl"]
 	path = Src/twitcurl
 	url = https://github.com/swatkat/twitcurl
+[submodule "Src/JSONparsing"]
+	path = Src/JSONparsing
+	url = https://github.com/nlohmann/json

@@ -5,5 +5,4 @@ add_library(twtProcessing
     DataProcessing.cpp
 )
 
-add_subdirectory(twitcurl/libtwitcurl)
-target_include_directories(twtProcessing PUBLIC "${PROJECT_SOURCE_DIR}/Src")
+target_include_directories(twtProcessing PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
