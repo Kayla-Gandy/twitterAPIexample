@@ -1,6 +1,10 @@
 #!/bin/bash
 #compile from CMake
 
+# cd Src/twitcurl/libtwitcurl
+# make
+# cd ../../..
+
 if [ -d "build" ]; then
 rm -r build
 fi
