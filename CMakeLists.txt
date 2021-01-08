@@ -2,11 +2,6 @@ cmake_minimum_required(VERSION 3.19)
 
 project(TwitterAPIProj VERSION 1.0)
 
-# set(API_KEY "\"\"")
-# set(SECRET_KEY "\"\"")
-# set(BEARER_TOKEN "\"\"")
-
-configure_file(Src/Twitconfig.h.in Src/Twitconfig.h)
 include_directories(TwitterAPIProj PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/Src")
 
 set(CMAKE_CXX_STANDARD 11)
