@@ -11,6 +11,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <fstream>
+#include <optional>
 #include <iostream>
 
 namespace twit_data{
@@ -21,16 +22,16 @@ class APIAuth{
     std::string _API_key;
     std::string _API_secret_key;
     std::string _bearer_token;
-    std::string _auth_secret;
-    std::string _auth_key;
+    std::optional<std::string> _auth_secret;
+    std::optional<std::string> _auth_key;
 public:
     APIAuth() = default;
     explicit APIAuth(const nlohmann::json& json_containing_auth):
             APIAuth(from_json(json_containing_auth)){}
     APIAuth(const std::string& username, const std::string& password,
             const std::string& API_key, const std::string& API_secret_key,
-            const std::string& bearer_token, const std::string& auth_secret,
-            const std::string& auth_key):
+            const std::string& bearer_token, const std::optional<std::string>& auth_secret,
+            const std::optional<std::string>& auth_key):
         _username{username}, _password{password}, 
         _API_key{API_key}, _API_secret_key{API_secret_key},
         _bearer_token{bearer_token}, _auth_secret{auth_secret},
@@ -57,10 +58,10 @@ public:
     [[nodiscard]] const std::string& get_bearer_token() const noexcept {
         return _bearer_token;
     }
-    [[nodiscard]] const std::string& get_auth_secret() const noexcept {
+    [[nodiscard]] const std::optional<std::string>& get_auth_secret() const noexcept {
         return _auth_secret;
     }
-    [[nodiscard]] const std::string& get_auth_key() const noexcept {
+    [[nodiscard]] const std::optional<std::string>& get_auth_key() const noexcept {
         return _auth_key;
     }
 };

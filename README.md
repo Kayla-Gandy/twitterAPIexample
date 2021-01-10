@@ -7,7 +7,7 @@
     "API key":"",
     "API secret key":"",
     "bearer token":"",
-    "authentication token key":"",
-    "authentication token secret":""
+    "authentication token key":null,
+    "authentication token secret":null
 }
 ```
