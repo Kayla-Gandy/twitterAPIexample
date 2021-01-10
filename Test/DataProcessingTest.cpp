@@ -10,6 +10,7 @@
 
 int main()
 {
-    twit_data::test_func();
+    auto twt_obj = twitCurl();
+    twit_data::authenticate_twitcurl_obj(twt_obj, "../authentication.json");
     return 0;
 }

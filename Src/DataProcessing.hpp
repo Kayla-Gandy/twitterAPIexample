@@ -15,34 +15,57 @@
 
 namespace twit_data{
 
-class APIKeys{
+class APIAuth{
+    std::string _username;
+    std::string _password;
     std::string _API_key;
     std::string _API_secret_key;
     std::string _bearer_token;
+    std::string _auth_secret;
+    std::string _auth_key;
 public:
-    APIKeys() = default;
-    explicit APIKeys(const nlohmann::json& json_containing_keys):
-            APIKeys(from_json(json_containing_keys)){}
-    APIKeys(const std::string& API_key, const std::string& API_secret_key, const std::string& bearer_token):
-        _API_key{API_key}, _API_secret_key{API_secret_key}, _bearer_token{bearer_token} {}
-    APIKeys(const APIKeys& keys) = default;
-    APIKeys(APIKeys&& keys) = default;
-    APIKeys& operator=(const APIKeys& keys) = default;
-    APIKeys& operator=(APIKeys&& keys) = default;
-    ~APIKeys() = default;
-    [[nodiscard]] static APIKeys from_json(const nlohmann::json& json_containing_keys);
+    APIAuth() = default;
+    explicit APIAuth(const nlohmann::json& json_containing_auth):
+            APIAuth(from_json(json_containing_auth)){}
+    APIAuth(const std::string& username, const std::string& password,
+            const std::string& API_key, const std::string& API_secret_key,
+            const std::string& bearer_token, const std::string& auth_secret,
+            const std::string& auth_key):
+        _username{username}, _password{password}, 
+        _API_key{API_key}, _API_secret_key{API_secret_key},
+        _bearer_token{bearer_token}, _auth_secret{auth_secret},
+        _auth_key{auth_key} {}
+    APIAuth(const APIAuth& auth) = default;
+    APIAuth(APIAuth&& auth) = default;
+    APIAuth& operator=(const APIAuth& auth) = default;
+    APIAuth& operator=(APIAuth&& auth) = default;
+    ~APIAuth() = default;
+    [[nodiscard]] static APIAuth from_json(const nlohmann::json& json_containing_auth);
+
+    [[nodiscard]] const std::string& get_username() const noexcept {
+        return _username;
+    }
+    [[nodiscard]] const std::string& get_password() const noexcept {
+        return _password;
+    }
+    [[nodiscard]] const std::string& get_API_key() const noexcept {
+        return _API_key;
+    }
+    [[nodiscard]] const std::string& get_secret_key() const noexcept {
+        return _API_secret_key;
+    }
+    [[nodiscard]] const std::string& get_bearer_token() const noexcept {
+        return _bearer_token;
+    }
+    [[nodiscard]] const std::string& get_auth_secret() const noexcept {
+        return _auth_secret;
+    }
+    [[nodiscard]] const std::string& get_auth_key() const noexcept {
+        return _auth_key;
+    }
 };
 
-APIKeys parse_keys(const std::string& path_to_json);
-
-void test_func()
-{
-
-    auto twt_obj = twitCurl();
-    // twt_obj.getOAuth().setConsumerKey(TWITTER_API_KEY);
-    // twt_obj.getOAuth().setConsumerSecret(TWITTER_SECRET_KEY);
-    std::cout << "uwu" << std::endl;
-}
+void authenticate_twitcurl_obj(twitCurl& twt_obj, const std::string& path_to_json);
 
 }// twit_data
 
