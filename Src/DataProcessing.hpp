@@ -67,6 +67,7 @@ public:
 };
 
 void authenticate_twitcurl_obj(twitCurl& twt_obj, const std::string& path_to_json);
+nlohmann::json trend_analysis(twitCurl& twt_obj);
 
 }// twit_data
 

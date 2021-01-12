@@ -79,6 +79,14 @@ void twit_data::authenticate_twitcurl_obj(twitCurl& twt_obj, const std::string& 
         std::cout << err.what() << std::endl;
         throw;
     }
+}
 
-    std::cout << "uwu" << std::endl;
+nlohmann::json twit_data::trend_analysis(twitCurl& twt_obj)
+{
+    std::string trends_json{};
+    twt_obj.trendsAvailableGet();
+    twt_obj.getLastWebResponse(trends_json);
+    auto available_trends = nlohmann::json(trends_json);
+
+    return available_trends;
 }
