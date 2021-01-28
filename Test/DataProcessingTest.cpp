@@ -12,7 +12,7 @@ int main()
 {
     auto twt_obj = twitCurl();
     twit_data::authenticate_twitcurl_obj(twt_obj, "../authentication.json");
-    auto trend_json = twit_data::trend_analysis(twt_obj);
-    std::cout << trend_json.dump() << std::endl;
+    auto trend_json = twit_data::search_petitions(twt_obj, "blm", 1);
+    std::cout << trend_json.size() << std::endl;
     return 0;
 }

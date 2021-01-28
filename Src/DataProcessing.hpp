@@ -10,6 +10,7 @@
 #include <oauthlib.h>
 #include <nlohmann/json.hpp>
 #include <string>
+#include <algorithm>
 #include <fstream>
 #include <optional>
 #include <iostream>
@@ -67,7 +68,7 @@ public:
 };
 
 void authenticate_twitcurl_obj(twitCurl& twt_obj, const std::string& path_to_json);
-nlohmann::json trend_analysis(twitCurl& twt_obj);
+nlohmann::json search_petitions(twitCurl& twt_obj, std::string topic, const unsigned int num_results_saved = 20);
 
 }// twit_data
 

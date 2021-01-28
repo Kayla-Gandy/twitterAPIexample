@@ -81,12 +81,32 @@ void twit_data::authenticate_twitcurl_obj(twitCurl& twt_obj, const std::string& 
     }
 }
 
-nlohmann::json twit_data::trend_analysis(twitCurl& twt_obj)
+nlohmann::json twit_data::search_petitions(twitCurl& twt_obj, std::string topic, const unsigned int num_results_saved)
 {
     std::string trends_json{};
-    twt_obj.trendsAvailableGet();
+    std::string search_query = topic + "_petition";
+    twt_obj.search(search_query, std::to_string(num_results_saved*5));
     twt_obj.getLastWebResponse(trends_json);
-    auto available_trends = nlohmann::json(trends_json);
+    auto available_trends = nlohmann::json::parse(trends_json);
+    auto tweets_json = available_trends["statuses"];
+
+    int favorite_count{};
+    for(auto tweet: tweets_json)
+    {
+        auto retweet_status = tweet["retweeted_status"];
+        auto retweet_count = retweet_status["retweet_count"];
+        auto favorite_count = retweet_status["favorite_count"];
+
+        auto links_json = tweet["entities"]["urls"];
+        if(!links_json.empty())
+        {
+            std::cout << links_json << std::endl;
+            std::cout << retweet_count << "\t" << favorite_count << std::endl;
+            std::cout << "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_" << std::endl;
+        }
+    }
 
     return available_trends;
-}
+}//https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/search-operators
+//https://stackoverflow.com/questions/10214279/getting-not-authorized-error-from-twitcurl-timelineuserget-method
+
